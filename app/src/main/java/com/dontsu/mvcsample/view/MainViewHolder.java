@@ -25,6 +25,7 @@ public class MainViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 if (listener != null) {
+                    //onDeleteClick을 상속받은 곳에서 동작이 생김. 따라서 MainActivity로 간다.
                     listener.onDeleteClick(person);
                 }
             }

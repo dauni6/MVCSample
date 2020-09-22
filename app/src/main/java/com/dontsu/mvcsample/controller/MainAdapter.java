@@ -7,20 +7,24 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dontsu.mvcsample.MainActivity;
 import com.dontsu.mvcsample.R;
 import com.dontsu.mvcsample.model.Person;
+import com.dontsu.mvcsample.view.MainActivity;
 import com.dontsu.mvcsample.view.MainViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import timber.log.Timber;
+
 public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
+    public static final String TAG = MainAdapter.class.getName();
 
     private List<Person> items = new ArrayList<>();
     private MainViewHolder.HolderClickListener holderClickListener;
 
     public MainAdapter(MainViewHolder.HolderClickListener holderClickListener) {
+        Timber.d("실행순서 : MainAdapter 생성자");
         this.holderClickListener = holderClickListener;
     }
 
@@ -47,8 +51,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
         return items;
     }
 
+    //MainActivity에서 입력받은 List를 넣어주기
     public void setItems(List<Person> items) {
         this.items = items;
-        notifyDataSetChanged();
+        notifyDataSetChanged(); //변경사항 알림
     }
 }

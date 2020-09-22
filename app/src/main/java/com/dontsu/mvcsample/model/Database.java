@@ -2,12 +2,15 @@ package com.dontsu.mvcsample.model;
 
 import java.util.ArrayList;
 
+import timber.log.Timber;
+
 public class Database {
     private static Database instance;
     private ArrayList<Person> personList = new ArrayList<>();
     private DatabaseListener databaseListener;
 
     private Database() {
+        Timber.d("실행순서 : Database 객체에서 생성자를 통해 리스트 만들어줌");
         for (int index = 0; index < 100; index++) {
             personList.add(new Person(index, String.format("Person%d", index)));
         }
@@ -41,6 +44,7 @@ public class Database {
     }
 
     public ArrayList<Person> getPersonList() {
+        Timber.d("실행순서 : 리스트 얻어옴");
         return personList;
     }
 
