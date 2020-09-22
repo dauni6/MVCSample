@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import timber.log.Timber;
 
 public class Database {
-    private static Database instance;
+    private static volatile Database instance = new Database();
     private ArrayList<Person> personList = new ArrayList<>();
     private DatabaseListener databaseListener;
 
@@ -17,22 +17,22 @@ public class Database {
     }
 
     public static Database getInstance() {
-        if (instance == null) {
-            instance = new Database();
-        }
         return instance;
     }
 
+    //입력의 역할
     public void add(Person person) {
         personList.add(0, person);
         notifyChange();
     }
 
+    //삭제의 역할
     public void remove(Person person) {
         personList.remove(person);
         notifyChange();
     }
 
+    //변경 알림의 역할
     private void notifyChange() {
         if (databaseListener != null) {
             databaseListener.onChanged();
